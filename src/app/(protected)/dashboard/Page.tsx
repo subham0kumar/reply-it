@@ -3,7 +3,7 @@ import React from "react";
 type Props = {};
 
 const Page = async (props: Props) => {
-  return <div>Page</div>;
+  return <div>Dashboard</div>;
 };
 
 export default Page;
