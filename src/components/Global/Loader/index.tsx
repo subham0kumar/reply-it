@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
+import { Spinner } from "./Spinner";
 
 type Props = {
   state: boolean;
@@ -11,10 +12,10 @@ type Props = {
 const Loader = ({ state, className, children, color }: Props) => {
   return state ? (
     <div className={cn(className)}>
-      {/* <Spinner color={color} /> */}
+      <Spinner color={color} />{" "}
     </div>
   ) : (
-    ""
+    children
   );
 };
 

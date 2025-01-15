@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Navigation } from "@/components/Navigation";
+import { LogoSmall } from "@/svgs/logo-small";
 
 export default function Page() {
   return (
@@ -15,7 +16,9 @@ export default function Page() {
       {/* Header */}
       <header className="fixed top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
         <div className="container flex h-16 items-center justify-between">
-          <span className="text-xl font-bold gradient-text">Reply-It</span>
+          <span className="text-xl font-bold gradient-text">
+            <LogoSmall />
+          </span>
           <Navigation />
           <div className="flex items-center gap-4">
             <Button variant="ghost" className="elegant-button">
@@ -61,12 +64,12 @@ export default function Page() {
         </div>
       </section>
 
-            {/* Curved Cards Section */}
-            <section className="container pb-24 relative">
+      {/* Curved Cards Section */}
+      <section className="container pb-24 relative">
         <div className="flex justify-center -space-x-4 md:-space-x-8">
           <div className="w-64 md:w-80 aspect-[3/4] rounded-[3rem] overflow-hidden transform hover:-translate-y-4 transition-transform duration-300 relative z-10">
             <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800"></div>
-            <img 
+            <img
               src="/placeholder.svg?height=400&width=300"
               alt="Creator Profile"
               className="w-full h-full object-cover object-center"
@@ -74,7 +77,7 @@ export default function Page() {
           </div>
           <div className="w-64 md:w-80 aspect-[3/4] rounded-[3rem] overflow-hidden transform hover:-translate-y-4 transition-transform duration-300 relative z-20">
             <div className="absolute inset-0 bg-[#E5E0D9] dark:bg-gray-700"></div>
-            <img 
+            <img
               src="/placeholder.svg?height=400&width=300"
               alt="Creator Profile"
               className="w-full h-full object-cover object-center"
@@ -82,7 +85,7 @@ export default function Page() {
           </div>
           <div className="w-64 md:w-80 aspect-[3/4] rounded-[3rem] overflow-hidden transform hover:-translate-y-4 transition-transform duration-300 relative z-30">
             <div className="absolute inset-0 bg-white dark:bg-gray-600"></div>
-            <img 
+            <img
               src="/placeholder.svg?height=400&width=300"
               alt="Creator Profile"
               className="w-full h-full object-cover object-center"
@@ -90,7 +93,7 @@ export default function Page() {
           </div>
           <div className="w-64 md:w-80 aspect-[3/4] rounded-[3rem] overflow-hidden transform hover:-translate-y-4 transition-transform duration-300 relative z-40">
             <div className="absolute inset-0 bg-[#7ED5C9] dark:bg-gray-700"></div>
-            <img 
+            <img
               src="/placeholder.svg?height=400&width=300"
               alt="Creator Profile"
               className="w-full h-full object-cover object-center"
@@ -99,7 +102,6 @@ export default function Page() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none"></div>
       </section>
-
 
       <Pricing />
       <Features />

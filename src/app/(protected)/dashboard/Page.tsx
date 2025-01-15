@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const Page = async (props: Props) => {
-  return <div>Dashboard</div>;
-};
+  return (
+    <div>Page</div>
+  )
+}
 
-export default Page;
+export default Page
