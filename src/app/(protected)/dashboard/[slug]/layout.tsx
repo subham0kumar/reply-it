@@ -15,6 +15,7 @@ function Layout({ children, params }: Props) {
       {/* Navbar  */}
       <div className="flex flex-col lg:ml-[250px] lg:pl-10 lg:py-5 overflow-auto">
         <Navbar slug={params.slug} />
+        {children}
       </div>
     </div>
   );
