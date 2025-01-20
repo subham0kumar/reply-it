@@ -4,11 +4,21 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import GradientButton from "../gradient-button";
 import { Button } from "@/components/ui/button";
+import { useQueryAutomations } from "@/hooks/user-queries";
 
 type Props = {};
 
 const AutomationsList = (props: Props) => {
+  const { data } = useQueryAutomations();
+
   const { pathname } = usePaths();
+
+  if (data?.status !== 200) {
+    return (
+      <div className="h-[70vh] flex justify-center items-center flex-col gap-y-3"></div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-y-3">
       <Link
@@ -39,7 +49,7 @@ const AutomationsList = (props: Props) => {
           </div>
           <div className="rounded-full border-2 border-dashed mt-3 border-white/60 px-3 py-1">
             <p className="text-sm text-[bfc0c3]">No Keywords</p>
-          </div> 
+          </div>
         </div>
         <div className="flex flex-col justify-between">
           <p className="text-sm font-light text-[#9b9ca0] capitalize">
