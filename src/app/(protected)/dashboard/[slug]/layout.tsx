@@ -7,7 +7,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import {
-  PrefetchUserAutomation,
+  PrefetchUserAutomations,
   PrefetchUserProfile,
 } from "@/react-query/prefetch";
 
@@ -21,7 +21,7 @@ const Layout = async ({ children, params }: Props) => {
 
   await PrefetchUserProfile(query);
 
-  await PrefetchUserAutomation(query);
+  await PrefetchUserAutomations(query);
 
   return (
     <HydrationBoundary state={dehydrate(query)}>

@@ -1,7 +1,9 @@
+import { getAutomationInfo } from "@/actions/automations";
 import Trigger from "@/components/Global/automations/trigger";
 import AutomationBreadCrumbs from "@/components/Global/bread-crumbs/automations";
 import { Warning } from "@/icons";
-import React from "react";
+import { PrefetchUserAutomation } from "@/react-query/prefetch";
+import { QueryClient } from "@tanstack/react-query";
 
 type Props = {
   params: {
@@ -9,7 +11,17 @@ type Props = {
   };
 };
 
-const Page = ({ params }: Props) => {
+export async function generateMetaData({ params }: { params: { id: string } }) {
+  const info = await getAutomationInfo(params.id);
+  return {
+    title: info.data?.name,
+  };
+}
+
+const Page = async ({ params }: Props) => {
+  const query = new QueryClient();
+  await PrefetchUserAutomation(query, params.id);
+
   return (
     <div className="flex flex-col items-center gap-y-20">
       <AutomationBreadCrumbs id={params.id} />
