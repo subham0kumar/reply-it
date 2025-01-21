@@ -1,7 +1,12 @@
 "use server";
 
 import { onCurrentUser } from "../user";
-import { createAutomation, findAutomation, getAllAutomation } from "./queries";
+import {
+  createAutomation,
+  findAutomation,
+  getAllAutomation,
+  updateAutomation,
+} from "./queries";
 
 export const createAutomations = async (id?: string) => {
   const user = await onCurrentUser();
@@ -32,8 +37,35 @@ export const getAutomationInfo = async (id: string) => {
     const automation = await findAutomation(id);
     if (automation) return { status: 200, data: automation };
 
-    return { status: 404, data: "Automation not found" };
+    return { status: 404 };
   } catch (error) {
+    return { status: 500 };
+  }
+};
+
+export const updateAutomationName = async (
+  automationId: string,
+  data: {
+    name?: string;
+    active?: boolean;
+    automation?: string;
+  }
+) => {
+  await onCurrentUser();
+  try {
+    const update = await updateAutomation(automationId, data);
+    if (update) {
+      return {
+        status: 200,
+        data: "Automation Updated",
+      };
+    }
+    return {
+      status: 404,
+      data: "Oops! count not update automation",
+    };
+  } catch (error) {
+    console.log(error);
     return { status: 500, data: "Internal Server Error" };
   }
 };
