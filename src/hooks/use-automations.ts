@@ -1,6 +1,12 @@
-import { createAutomations, updateAutomationName } from "@/actions/automations";
+import {
+  createAutomations,
+  saveListener,
+  updateAutomationName,
+} from "@/actions/automations";
 import { useEffect, useRef, useState } from "react";
 import { useMutationData } from "./use-mutations";
+import { z } from "zod";
+import useZodForm from "./use-zod-form";
 
 export const useCreateAutomation = (id?: string) => {
   const { mutate, isPending } = useMutationData(
@@ -50,5 +56,37 @@ export const useEditAutomation = (automationId: string) => {
     inputRef,
     enableEdit,
     disableEdit,
+  };
+};
+
+export const useListener = (id: string) => {
+  const [listener, setListener] = useState<"MESSAGE" | "SMART_AI">("MESSAGE");
+
+  const promptSchema = z.object({
+    propmt: z.string(),
+    reply: z.string(),
+  });
+
+  const { isPending, mutate } = useMutationData(
+    ["create-listener"],
+    (data: { prompt: string; reply: string }) =>
+      saveListener(id, listener, data.prompt, data.reply),
+    "automation-info"
+  );
+
+  const { register, errors, onFormSubmit, watch, reset } = useZodForm(
+    promptSchema,
+    mutate
+  );
+
+  const onSetListener = (type: "MESSAGE" | "SMART_AI") => () =>
+    setListener(type);
+
+  return {
+    onSetListener,
+    register,
+    onFormSubmit,
+    listener,
+    isPending,
   };
 };

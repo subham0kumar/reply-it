@@ -4,5 +4,8 @@ type Props = {
 };
 
 export const SubscriptionPlan = ({ children, type }: Props) => {
+  
+  const {} = useQueryUser();
+
   return children;
 };
