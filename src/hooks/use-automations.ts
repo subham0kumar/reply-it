@@ -1,6 +1,9 @@
 import {
   createAutomations,
+  deleteKeyword,
+  saveKeyword,
   saveListener,
+  saveTrigger,
   updateAutomationName,
 } from "@/actions/automations";
 import { useEffect, useRef, useState } from "react";
@@ -8,7 +11,6 @@ import { useMutationData } from "./use-mutations";
 import { z } from "zod";
 import useZodForm from "./use-zod-form";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import { stat } from "fs";
 import { useDispatch } from "react-redux";
 import { TRIGGER } from "@/redux/slices/automation";
 
@@ -95,7 +97,7 @@ export const useListener = (id: string) => {
   };
 };
 
-export const useTrigger = (id: string) => {
+export const useTriggers = (id: string) => {
   const types = useAppSelector(
     (state) => state.AutomationReducer.trigger?.types
   );
@@ -105,10 +107,41 @@ export const useTrigger = (id: string) => {
   const onSetTrigger = (type: "COMMENT" | "DM") =>
     dispatch(TRIGGER({ trigger: { type } }));
 
-  const { isPending, mutate } = useMutationData([
-    "add-trigger",
-    (data: { types: string[] }) => saveTrigger(),
-  ]);
+  const { isPending, mutate } = useMutationData(
+    ["add-trigger"],
+    (data: { types: string[] }) => saveTrigger(id, data.types),
+    "automation-info"
+  );
 
-  const onSaveTrigger = () => {};
+  const onSaveTrigger = () => mutate({ types });
+
+  return { types, onSetTrigger, onSaveTrigger, isPending };
+};
+
+export const useKeywords = (id: string) => {
+  const [keyword, setKeyword] = useState("");
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setKeyword(e.target.value);
+
+  const { mutate } = useMutationData(
+    ["add-keyword"],
+    (data: { keywords: string }) => saveKeyword(id, data.keywords),
+    "automation-info",
+    () => setKeyword("")
+  );
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      mutate({ keyword });
+      setKeyword("");
+    }
+  };
+
+  const { mutate: deleteMutation } = useMutationData(
+    ["delete-keyword"],
+    (id: string) => deleteKeyword(id),
+    "automation-info"
+  );
+
+  return { keyword, onValueChange, onKeyPress, deleteMutation };
 };

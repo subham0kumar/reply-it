@@ -2,8 +2,11 @@
 
 import { onCurrentUser } from "../user";
 import {
+  addKeyword,
   addListener,
+  addTrigger,
   createAutomation,
+  deleteKeywordQuery,
   findAutomation,
   getAllAutomation,
   updateAutomation,
@@ -83,6 +86,38 @@ export const saveListener = async (
     if (create) return { status: 200, data: "Listener created" };
     return { status: 404, data: "Can't save the Listener" };
   } catch (error) {
-    return { status: 500,data: 'Internal Server Error' };
+    return { status: 500, data: "Internal Server Error" };
+  }
+};
+
+export const saveTrigger = async (automationId: string, trigger: string[]) => {
+  await onCurrentUser();
+  try {
+    const create = await addTrigger(automationId, trigger);
+    if (create) return { status: 200, data: "Trigger created" };
+    return { status: 404, data: "Can't save the Trigger" };
+  } catch (error) {
+    return { status: 500, data: "Internal Server Error" };
+  }
+};
+
+export const saveKeyword = async (automationId: string, keyword: string) => {
+  await onCurrentUser();
+  try {
+    const create = await addKeyword(automationId, keyword);
+    if (create) return { status: 200, data: "Trigger created" };
+    return { status: 404, data: "Can't save the Trigger" };
+  } catch (error) {
+    return { status: 500, data: "Internal Server Error" };
+  }
+};
+export const deleteKeyword = async (id: string) => {
+  await onCurrentUser();
+  try {
+    const deleted = await deleteKeywordQuery(id);
+    if (deleted) return { status: 200, data: "Trigger created" };
+    return { status: 404, data: "Can't save the Trigger" };
+  } catch (error) {
+    return { status: 500, data: "Internal Server Error" };
   }
 };

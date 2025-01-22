@@ -5,6 +5,9 @@ import { useQueryAutomation } from "@/hooks/user-queries";
 import ThenAction from "../then/then-action";
 import TriggerButton from "../trigger-button";
 import ActiveTrigger from "./active";
+import { useTriggers } from "@/hooks/use-automations";
+import { cn } from "@/lib/utils";
+import Keywords from "./keywords";
 
 type Props = {
   id: string;
@@ -12,7 +15,8 @@ type Props = {
 
 const Trigger = ({ id }: Props) => {
   const { data } = useQueryAutomation(id);
-  const { onSetTrigger } = useTriggers(id);
+  const { types, onSaveTrigger, isPending, onSetTrigger } = useTriggers(id);
+  console.log(types?.length);
   if (data?.data && data?.data?.trigger.length > 0) {
     return (
       <div className="flex flex-col gap-y-6">
@@ -42,14 +46,27 @@ const Trigger = ({ id }: Props) => {
     );
   }
   return (
-    <TriggerButton label="Trigger">
+    <TriggerButton label="Add Trigger">
       <div className="flex flex-col gap-y-2">
         {AUTOMATION_TRIGGERS.map((trigger) => (
           <div
             key={trigger.id}
             onClick={() => onSetTrigger(trigger.type)}
-          ></div>
+            className={cn(
+              "hover:opacity-80 text-white rounded-xl flex cursor-pointer flex-col p-3 gap-y-2",
+              !types?.find((t) => t === trigger.type)
+                ? "bg-background-80"
+                : "bg-gradient-to-br from-[#3352CC] font-medium to-[#1C2D70]"
+            )}
+          >
+            <div className="flex gap-x-2 items-center">
+              {trigger.icon}
+              <p className="font-bold">{trigger.label}</p>
+            </div>
+            <p className="text-sm font-light">{trigger.description}</p>
+          </div>
         ))}
+        <Keywords id={id} />
       </div>
     </TriggerButton>
   );
