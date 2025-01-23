@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { useQueryAutomation } from "@/hooks/user-queries";
 import { PlaneBlue, SmartAi, Warning } from "@/icons";
 import React from "react";
+import PostButton from "../post";
 
 type Props = {
   id: string;
@@ -41,7 +42,17 @@ const ThenNode = ({ id }: Props) => {
               : "Let Smart AI take over"}
           </p>
         </div>
+        <p className="font-light text-text-secondary">
+          {data.data.listener.prompt}
+        </p>
       </div>
+      {data.data.posts.length > 0 ? (
+        <> </>
+      ) : commentTrigger ? (
+        <PostButton />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

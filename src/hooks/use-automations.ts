@@ -65,11 +65,12 @@ export const useEditAutomation = (automationId: string) => {
   };
 };
 
+
 export const useListener = (id: string) => {
   const [listener, setListener] = useState<"MESSAGE" | "SMART_AI" | null>(null);
 
   const promptSchema = z.object({
-    propmt: z.string().min(1),
+    prompt: z.string().min(1),
     reply: z.string(),
   });
 
@@ -80,20 +81,13 @@ export const useListener = (id: string) => {
     "automation-info"
   );
 
-  const { register, errors, onFormSubmit, watch, reset } = useZodForm(
+  const { errors, onFormSubmit, register, reset, watch } = useZodForm(
     promptSchema,
     mutate
   );
 
-  const onSetListener = (type: "MESSAGE" | "SMART_AI") => setListener(type);
-
-  return {
-    onSetListener,
-    register,
-    onFormSubmit,
-    listener,
-    isPending,
-  };
+  const onSetListener = (type: "SMART_AI" | "MESSAGE") => setListener(type);
+  return { onSetListener, register, onFormSubmit, listener, isPending };
 };
 
 export const useTriggers = (id: string) => {
