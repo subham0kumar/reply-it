@@ -1,4 +1,5 @@
 import { getAutomationInfo } from "@/actions/automations";
+import ThenNode from "@/components/Global/automations/then/node";
 import Trigger from "@/components/Global/automations/trigger";
 import AutomationBreadCrumbs from "@/components/Global/bread-crumbs/automations";
 import { Warning } from "@/icons";
@@ -37,6 +38,7 @@ const Page = async ({ params }: Props) => {
           </div>
           <Trigger id={params.id} />
         </div>
+        <ThenNode id={params.id} />
       </div>
     </HydrationBoundary>
   );

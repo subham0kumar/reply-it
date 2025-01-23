@@ -66,10 +66,10 @@ export const useEditAutomation = (automationId: string) => {
 };
 
 export const useListener = (id: string) => {
-  const [listener, setListener] = useState<"MESSAGE" | "SMART_AI">();
+  const [listener, setListener] = useState<"MESSAGE" | "SMART_AI" | null>(null);
 
   const promptSchema = z.object({
-    propmt: z.string(),
+    propmt: z.string().min(1),
     reply: z.string(),
   });
 
@@ -85,8 +85,7 @@ export const useListener = (id: string) => {
     mutate
   );
 
-  const onSetListener = (type: "MESSAGE" | "SMART_AI") => () =>
-    setListener(type);
+  const onSetListener = (type: "MESSAGE" | "SMART_AI") => setListener(type);
 
   return {
     onSetListener,
@@ -125,7 +124,7 @@ export const useKeywords = (id: string) => {
 
   const { mutate } = useMutationData(
     ["add-keyword"],
-    (data: { keywords: string }) => saveKeyword(id, data.keywords),
+    (data: { keyword: string }) => saveKeyword(id, data.keyword),
     "automation-info",
     () => setKeyword("")
   );

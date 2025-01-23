@@ -8,6 +8,8 @@ import ActiveTrigger from "./active";
 import { useTriggers } from "@/hooks/use-automations";
 import { cn } from "@/lib/utils";
 import Keywords from "./keywords";
+import { Button } from "@/components/ui/button";
+import Loader from "../../Loader";
 
 type Props = {
   id: string;
@@ -67,6 +69,13 @@ const Trigger = ({ id }: Props) => {
           </div>
         ))}
         <Keywords id={id} />
+        <Button
+          onClick={onSaveTrigger}
+          disabled={types?.length === 0}
+          className="bg-gradient-to-br text-white rounded-full from-[#3352cc] font-medium to-[#1C2D70] hover:opacity-70 transition duration-100 ease-in-out"
+        >
+          <Loader state={isPending}>Creata Trigger</Loader>
+        </Button>
       </div>
     </TriggerButton>
   );

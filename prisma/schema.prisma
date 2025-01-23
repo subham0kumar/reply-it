@@ -34,7 +34,7 @@ model Automation {
   listener Listener?
   posts    Post[]
   dms      Dms[]
-  keyword  Keyword[]
+  keywords  Keyword[]
   userId   String?   @unique @db.Uuid
   User     User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

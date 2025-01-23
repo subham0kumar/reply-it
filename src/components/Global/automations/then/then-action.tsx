@@ -28,7 +28,7 @@ const ThenAction = ({ id }: Props) => {
           listener.type === "SMART_AI" ? (
             <SubscriptionPlan key={listener.type} type="Pro">
               <div
-                onClick={onSetListener(listener.type)}
+                onClick={() => onSetListener(listener.type)}
                 key={listener.id}
                 className={cn(
                   Listerner === listener.type
@@ -46,7 +46,7 @@ const ThenAction = ({ id }: Props) => {
             </SubscriptionPlan>
           ) : (
             <div
-              onClick={onSetListener(listener.type)}
+              onClick={() => onSetListener(listener.type)}
               key={listener.id}
               className={cn(
                 Listerner === listener.type

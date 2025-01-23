@@ -24,8 +24,8 @@ const Keywords = ({ id }: Props) => {
       </p>
       <div className="flex justify-start items-center gap-2 flex-wrap">
         {data?.data?.keyword &&
-          data?.data?.keyword?.length > 0 &&
-          data?.data?.keyword?.map(
+          data?.data?.keyword.length > 0 &&
+          data?.data?.keyword.map(
             (word) =>
               word.id !== latestVariable.variables.id && (
                 <div
@@ -45,11 +45,11 @@ const Keywords = ({ id }: Props) => {
 
         <Input
           placeholder="Add Keyword..."
-          style={{
-            width: Math.min(Math.max(keyword.length || 10, 2), 50) + "ch",
-          }}
+          // style={{
+          //   width: Math.min(Math.max(keyword.length || 10, 2), 50) + "ch",
+          // }}
           value={keyword}
-          className="p-0 bg-transparent ring-0 border-none outline-none"
+          className="bg-transparent ring-0 border outline-none"
           onChange={onValueChange}
           onKeyUp={onKeyPress}
         />
