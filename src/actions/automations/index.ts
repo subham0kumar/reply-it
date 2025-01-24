@@ -1,9 +1,12 @@
 "use server";
 
+import { on } from "events";
 import { onCurrentUser } from "../user";
+import { findUser } from "../user/queries";
 import {
   addKeyword,
   addListener,
+  addPosts,
   addTrigger,
   createAutomation,
   deleteKeywordQuery,
@@ -117,6 +120,40 @@ export const deleteKeyword = async (id: string) => {
     const deleted = await deleteKeywordQuery(id);
     if (deleted) return { status: 200, data: "Trigger created" };
     return { status: 404, data: "Can't save the Trigger" };
+  } catch (error) {
+    return { status: 500, data: "Internal Server Error" };
+  }
+};
+
+export const getProfilePosts = async () => {
+  const user = await onCurrentUser();
+  try {
+    const profile = await findUser(user.id);
+    const posts = await fetch(
+        `${process.env.INSTAGRAM_BASE_URL}/me/media?fields=id,caption,media_url,media_type,timestamp&limit=10&access_token=${profile?.integrations[0].token}`
+    );
+    const parsed = await posts.json();
+    if (parsed) return { status: 200, data: parsed };
+    return { status: 404 };
+  } catch (error) {
+    return { status: 500 };
+  }
+};
+
+export const savePosts = async (
+  automationId: string,
+  posts: {
+    postid: string;
+    caption?: string;
+    media: string;
+    mediaType: "IMAGE" | "VIDEO" | "CAROSEL_ALBUM";
+  }[]
+) => {
+  await onCurrentUser();
+  try {
+    const create = await addPosts(automationId, posts);
+    if (create) return { status: 200, data: "Posts created" };
+    return { status: 404, data: "Can't save the Posts" };
   } catch (error) {
     return { status: 500, data: "Internal Server Error" };
   }
