@@ -42,7 +42,7 @@ const AutomationBreadCrumbs = ({ id }: Props) => {
             <></>
           ) : (
             <span
-              className="cursor-pointer hover:opcacity-75 duration-100 transition flex-shrink-0 mr-4"
+              className="cursor-pointer hover:opacity-75 duration-100 transition flex-shrink-0 mr-4"
               onClick={enableEdit}
             >
               <PencilIcon size={14} />
@@ -63,7 +63,7 @@ const AutomationBreadCrumbs = ({ id }: Props) => {
           </p> */}
         </div>
       </div>
-      <ActivateAutomationsButton />
+      <ActivateAutomationsButton id={id} />
     </div>
   );
 };

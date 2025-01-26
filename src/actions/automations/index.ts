@@ -130,7 +130,7 @@ export const getProfilePosts = async () => {
   try {
     const profile = await findUser(user.id);
     const posts = await fetch(
-        `${process.env.INSTAGRAM_BASE_URL}/me/media?fields=id,caption,media_url,media_type,timestamp&limit=10&access_token=${profile?.integrations[0].token}`
+      `${process.env.INSTAGRAM_BASE_URL}/me/media?fields=id,caption,media_url,media_type,timestamp&limit=10&access_token=${profile?.integrations[0].token}`
     );
     const parsed = await posts.json();
     if (parsed) return { status: 200, data: parsed };
@@ -155,6 +155,22 @@ export const savePosts = async (
     if (create) return { status: 200, data: "Posts created" };
     return { status: 404, data: "Can't save the Posts" };
   } catch (error) {
+    return { status: 500, data: "Internal Server Error" };
+  }
+};
+
+export const activateAutomation = async (id: string, state: boolean) => {
+  await onCurrentUser();
+  try {
+    const update = await updateAutomation(id, { active: state });
+    if (update)
+      return {
+        status: 200,
+        data: `Automation ${state ? "Activated" : "Deactivated"}`,
+      };
+    return { status: 404, data: "Oops! Automation not found" };
+  } catch (error) {
+    console.log(error);
     return { status: 500, data: "Internal Server Error" };
   }
 };
