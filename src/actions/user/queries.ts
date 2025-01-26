@@ -41,3 +41,7 @@ export const createUser = async (
     },
   });
 };
+
+export const updateSubscription = async () => {
+  
+};

@@ -20,9 +20,13 @@ model User {
 }
 
 model Subscription {
-  id     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId String? @unique @db.Uuid
-  User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String?           @unique @db.Uuid
+  User       User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime          @default(now())
+  plan       SUBSCRIPTION_PLAN @default(FREE)
+  updatedAt  DateTime          @default(now())
+  customerId String?           @unique
 }
 
 model Automation {
@@ -34,7 +38,7 @@ model Automation {
   listener Listener?
   posts    Post[]
   dms      Dms[]
-  keywords  Keyword[]
+  keywords Keyword[]
   userId   String?   @unique @db.Uuid
   User     User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -65,7 +69,7 @@ model Post {
   postid       String
   caption      String?
   media        String
-  mediaType    MEDIA_TYPE   @default(IMAGE)
+  mediaType    MEDIA_TYPE  @default(IMAGE)
   Automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
   automationId String?     @db.Uuid
 }
