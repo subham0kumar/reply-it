@@ -4,6 +4,9 @@ import ActivateAutomationsButton from "../../activate-automations-button";
 import { useQueryAutomation } from "@/hooks/user-queries";
 import { useEditAutomation } from "@/hooks/use-automations";
 import { useMutationDataState } from "@/hooks/use-mutations";
+import { usePaths } from "@/hooks/use-nav";
+import { useParams } from "next/navigation";
+import HamburgerMenu from "../../hamburger";
 
 type Props = {
   id: string;
@@ -11,6 +14,9 @@ type Props = {
 
 const AutomationBreadCrumbs = ({ id }: Props) => {
   const { data } = useQueryAutomation(id);
+  const { page } = usePaths();
+  const params = useParams();
+  console.log(typeof params.slug);
 
   const { isPending, edit, inputRef, enableEdit, disableEdit } =
     useEditAutomation(id);
@@ -19,7 +25,8 @@ const AutomationBreadCrumbs = ({ id }: Props) => {
 
   return (
     <div className="rounded-full w-full p-5 bg-[#18181B1A] flex items-center">
-      <div className="flex items-center gap-x-3 min-w-0">
+      <HamburgerMenu slug={params.slug} page={page} />
+      <div className="flex items-center gap-x-3 min-w-0 ml-4">
         <p className="text-[#989CA0] truncate">Automations</p>
         <ChevronRight className="flex-shrink-0" color="#989CA0" />
         <span className="flex gap-x-3 items-center min-w-0">

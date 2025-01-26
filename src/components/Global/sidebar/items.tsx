@@ -5,7 +5,7 @@ import React from "react";
 
 type Props = {
   page: string;
-  slug: string;
+  slug: string | string[];
 };
 
 const Items = ({ page, slug }: Props) => {

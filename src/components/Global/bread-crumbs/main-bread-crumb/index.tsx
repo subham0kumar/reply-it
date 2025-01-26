@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = {
   page: string;
-  slug: string;
+  slug?: string;
 };
 
 const MainBreadCrumb = ({ page, slug }: Props) => {

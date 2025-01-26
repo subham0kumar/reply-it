@@ -15,6 +15,7 @@ import CreateAutomation from "../create-automation";
 import Search from "../search";
 import { Notifications } from "./notifications";
 import MainBreadCrumb from "../bread-crumbs/main-bread-crumb";
+import HamburgerMenu from "../hamburger";
 
 type Props = {
   slug: string;
@@ -29,37 +30,7 @@ const Navbar = ({ slug }: Props) => {
       <div className="flex flex-col">
         <div className="flex gap-x-3 lg:gap-x-5 justify-end">
           <span className="flex lg:hidden items-center flex-1 gap-x-2">
-            <Sheet side="left" trigger={<Menu />} className="lg:hidden">
-              <div className="flex flex-col gap-y-5 w-full h-full p-3 bg-[#0e0e0e] bg-opacity-90  bg-clip-padding backdrop-filter backdrop--blur__safari backdrop-blur-3xl">
-                <div className="flex gap-x-2 items-center px-5 pt-3 justify-center">
-                  <LogoSmall />
-                </div>
-                <div className="flex flex-col py-3">
-                  <Items page={page} slug={slug} />
-                </div>
-                <div className="px-16">
-                  <Separator
-                    orientation="horizontal"
-                    className="bg-[#333333]"
-                  />
-                </div>
-                <div className="px-3 flex flex-col gap-y-5">
-                  <div className="flex gap-x-2">
-                    <ClerkAuthState />
-                    <p className="text-[#989CA0]">Profile</p>
-                  </div>
-                  <div className="flex gap-x-3">
-                    <HelpDuoToneWhite />
-                    <p className="text-[#989CA0]">Help</p>
-                  </div>
-                </div>
-                <SubscriptionPlan type="Free">
-                  <div className="flex-1 flex flex-col justify-end">
-                    <UpgradeCard />
-                  </div>
-                </SubscriptionPlan>
-              </div>
-            </Sheet>
+            <HamburgerMenu slug={slug} page={page} />
           </span>
           <Search />
           <CreateAutomation />
