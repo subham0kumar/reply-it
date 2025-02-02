@@ -82,7 +82,7 @@ We welcome contributions! Feel free to submit **issues** and **pull requests** t
 ---
 
 ## 📞 Contact
-For any inquiries, reach out via **[your.email@example.com](mailto:subhamkumar9650@gmail.com)** or open an issue on GitHub.
+For any inquiries, reach out via **[My Email](mailto:subhamkumar9650@gmail.com)** or open an issue on GitHub.
 
 ---
 
