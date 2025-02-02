@@ -81,13 +81,8 @@ We welcome contributions! Feel free to submit **issues** and **pull requests** t
 
 ---
 
-## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## 📞 Contact
-For any inquiries, reach out via **[your.email@example.com](mailto:your.email@example.com)** or open an issue on GitHub.
+For any inquiries, reach out via **[your.email@example.com](mailto:subhamkumar9650@gmail.com)** or open an issue on GitHub.
 
 ---
 
